@@ -1,29 +1,25 @@
-# hello-world-docker
+# dockerized vue js runtime configuration example
 
-## Project setup
-```
-yarn install
-```
+Demo of the ideas in [how to ship the same JS bundle across N environments](https://stuartsandine.com/js-bundle-across-envs)
+in the context of a dockerized vue app
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
 
-### Compiles and minifies for production
+Build image with minified bundle served by nginx:
 ```
-yarn run build
+docker build -t vuejs-cookbook/dockerize-vuejs-app .
 ```
 
-### Run your tests
+Set an environment variable on host, under the prefix `JS_BUNDLE_RUNTIME_CONFIG_`:
+
 ```
-yarn run test
+export JS_BUNDLE_RUNTIME_CONFIG_FOOD=pizza
 ```
 
-### Lints and fixes files
+And run it:
 ```
-yarn run lint
+docker-compose up
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+And since we told the `docker-compose.yml` file to pass this variable through
+to the container, that happens, and at container startup the config gets
+injected into index.html, where we can then parse it in our JS bundle.

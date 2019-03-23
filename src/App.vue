@@ -1,18 +1,27 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld v-bind:msg="msg"/>
   </div>
 </template>
 
 <script>
+function getRuntimeConfig() {
+    return JSON.parse(
+      document.getElementById('js-bundle-runtime-config').innerHTML
+    );
+}
+
+const msg = `food is: ${getRuntimeConfig().FOOD}` 
+
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
   components: {
     HelloWorld
-  }
+  },
+  data: () => ({ msg })
 }
 </script>
 

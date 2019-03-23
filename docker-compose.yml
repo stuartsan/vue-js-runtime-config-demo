@@ -1,0 +1,8 @@
+version: '3'
+services:
+  vue:
+    image: vuejs-cookbook/dockerize-vuejs-app
+    ports:
+      - "8080:80"
+    environment:
+      - JS_BUNDLE_RUNTIME_CONFIG_FOOD
